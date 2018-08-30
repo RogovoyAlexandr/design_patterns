@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Observer Pattern</title>
+
+    <style>
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            max-width: 200px;
+            margin: auto;
+        }
+
+        .go-main {
+            padding: 5px 10px;
+            border-radius: 15px;
+            background-color: aquamarine;
+        }
+
+        #app {
+            padding: 10px;
+            background-color: beige;
+        }
+
+    </style>
+
+</head>
+<body>
+<main id="app">
+    <a class="go-main" href="../../index.html">Main page</a>
+    <br>
+    <br>
+    <br>
+
+    <div class="app-container">
+        <button id="addNewObserver" style="margin-bottom: 8px">Add New Observer textbox</button>
+        <input id="mainText" type="text"/>
+        <div id="observersContainer"></div>
+    </div>
+</main>
+</body>
+</html>
