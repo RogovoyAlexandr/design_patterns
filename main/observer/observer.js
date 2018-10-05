@@ -25,3 +25,30 @@ ObserverList.prototype.removeAt = function (index) {
 ObserverList.prototype.count = function () {
     return this.list.length;
 };
+
+//Subject-----------------------------------
+
+function Subject() {
+    this.observerList = new ObserverList();
+}
+
+Subject.prototype.append = function (observer) {
+    this.observerList.append(observer);
+};
+
+Subject.prototype.remove = function (observer) {
+    this.observerList.removeAt(this.observerList.indexOf(observer));
+};
+
+Subject.prototype.notify = function (context) {
+    for (var i = 0; i < this.observerList.count(); ++i) {
+      this.observerList.get(i).update(context);
+    }
+};
+
+//Observer-----------------------------------
+function Observer() {
+    this.update = function (context) {
+
+    }
+}
