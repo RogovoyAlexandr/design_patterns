@@ -23,8 +23,17 @@
             background-color: beige;
         }
 
-    </style>
+        #mainText {
+            background-color: lavenderblush;
+        }
 
+        .observer-input {
+            margin-top: 8px;
+            width: 100%;
+        }
+
+    </style>
+    <script src="observer.js"></script>
 </head>
 <body>
 <main id="app">
@@ -34,10 +43,56 @@
     <br>
 
     <div class="app-container">
-        <button id="addNewObserver" style="margin-bottom: 8px">Add New Observer textbox</button>
+        <button id="addNewObserver" style="margin-bottom: 8px">Add a new observer</button>
+        <button id="removeObserver" style="margin-bottom: 8px">Remove the last observer</button>
         <input id="mainText" type="text"/>
         <div id="observersContainer"></div>
     </div>
 </main>
+
+<script>
+    // Extend an object with an extension
+    function extend(obj, extension) {
+        for (var key in extension) {
+            obj[key] = extension[key];
+        }
+    }
+
+    var button = document.getElementById('addNewObserver'),
+        mainText = document.getElementById('mainText'),
+        removeObserver = document.getElementById('removeObserver'),
+        container = document.getElementById('observersContainer');
+
+    extend(mainText, new Subject());
+
+    mainText.onkeyup = function (e) {
+        this.notify(this.value);
+    };
+
+    button.onclick = function () {
+        var newText = document.createElement('input');
+        newText.type = 'text';
+        newText.classList.add('observer-input');
+        extend(newText, new Observer());
+        mainText.append(newText);
+
+        newText.update = function (value) {
+            this.value = value;
+        };
+
+        container.insertAdjacentElement("beforeend", newText);
+    };
+
+    removeObserver.onclick = function () {
+        console.log('before remove', mainText.observerList.count());
+        let lastIndex = mainText.observerList.count() - 1;
+        let elem = mainText.observerList.get(lastIndex);
+        if (elem) {
+            mainText.remove(elem);
+            elem.parentElement.removeChild(elem);
+        }
+        console.log('after remove', mainText.observerList.count());
+    };
+</script>
 </body>
 </html>
