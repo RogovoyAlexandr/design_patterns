@@ -13,7 +13,7 @@
                 len = subscribers ? subscribers.length : 0;
 
             while (len--)
-                subscribers.func(event, args)
+                subscribers[len].func(event, args)
         });
 
         return true;
